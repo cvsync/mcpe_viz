@@ -270,10 +270,10 @@ namespace mcpe_viz {
     }
     if ( fmem != NULL ) {
       result = write(output, fmem, fileinfo.st_size);
+      munmap(fmem, fileinfo.st_size);
     } else {
       result = -1;
     }
-    munmap(fmem, fileinfo.st_size);
 #else
     //sendfile will work with non-socket output (i.e. regular file) on Linux 2.6.33+
     off_t bytesCopied = 0;
